@@ -1,0 +1,31 @@
+name: PGWhiteList
+main: com.jctpe.pgwhitelist.PGWhiteList
+version: 1.0
+api-version: 1.19
+author: JoeTpe_aka_PGCat
+libraries:
+  - org.postgresql:postgresql:42.2.23
+commands:
+  pgwhitelist:
+    aliases:
+      - pgwl
+      - pg
+    usage: |
+      /<command> add [player-name] - add player into SQL whitelist. (auto activate)
+      /<command> remove [player-name] - remove player from SQL whitelist.
+      /<command> activate [player-name] - activate the player in SQL whitelist.
+      /<command> deactivate [player-name] - deactivate the player in SQL whitelist.
+      /<command> ban [player-name] [reason] - ban a player from whitelist.
+      /<command> on|off - switch the whitelist on/off.
+      /<command> list - list the whole player list from whitelist.
+      /<command> jsondump - import the Minecraft native whitelist json file into SQL whitelist.
+      /<command> dbdump - export the SQL whitelist into Minecraft native whitelist json format.
+    permission-message: "You don't have permission to do that."
+
+permissions:
+  pgwhitelist.help:
+    default: true
+    description: Provides admin access to help command
+  pgwhitelist.*:
+    default: op
+    description: Provides access to all whitelist commands
