@@ -2,9 +2,8 @@ package com.jctpe.pgwhitelist;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.UUID;
 
 public class SqlHandler {
 //    FileConfiguration config = getConfig();
@@ -44,5 +43,33 @@ public class SqlHandler {
             throwables.printStackTrace();
             return false;
         }
+    }
+
+    public Boolean checkPlayer(UUID playerUuid) {
+//Statement st = cnx.createStatement();
+//            ResultSet rs = st.executeQuery("select * from \"PlayerList_playerdata\"");
+        try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
+            if (cnx != null) {
+                String stmt = """
+                        SELECT * FROM whitelist
+                        WHERE active
+                        AND NOT ban
+                        AND uuid = '""" + playerUuid.toString() + "'";
+                Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(stmt);
+                int i = 0;
+                while (rs.next()) {
+                    i++;
+                }
+                cnx.close();
+                return i == 1;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+
     }
 }
