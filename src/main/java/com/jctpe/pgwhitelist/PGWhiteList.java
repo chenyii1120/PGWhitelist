@@ -19,7 +19,7 @@ public class PGWhiteList extends JavaPlugin {
     @Override
     public void onEnable() {
         logger = getLogger();
-        getLogger().info("PG WhiteList now enabled!");
+        logger.info("PG WhiteList now enabled!");
         saveDefaultConfig();
         config = getConfig();
         try {
@@ -30,15 +30,15 @@ public class PGWhiteList extends JavaPlugin {
         SqlHandler dbh = new SqlHandler(config);
         boolean sqlEnabled =  config.getBoolean("enabled-sql");
         if (sqlEnabled) {
-            getLogger().info("SQL Whitelisting now enabled.");
+            logger.info("SQL Whitelisting now enabled.");
             if (dbh.testConnection()) {
 //            if (true) {
-                getLogger().info("SQL connected!");
+                logger.info("SQL connected!");
             } else {
-                getLogger().warning("Cannot connect to SQL, please check!");
+                logger.warning("Cannot connect to SQL, please check!");
             }
         } else {
-            getLogger().info("SQL Whitelisting is disabled.");
+            logger.info("SQL Whitelisting is disabled.");
         }
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
         // 注册事件处理器，这里必须实例化，this 表明注册到本插件上
