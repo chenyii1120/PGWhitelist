@@ -26,8 +26,10 @@ public class SqlHandler {
         this.PASSWORD = config.getString("sql-info.password");
         this.DBNAME = config.getString("sql-info.db-name");
         this.PATH = "jdbc:postgresql://" + ADDR + ":" + PORT + "/" + DBNAME;
-        this.DRIVER = config.getString("SqlDriver");
-        this.DRIVERPATH = config.getString("SqlDriverJar");
+//        this.DRIVER = config.getString("SqlDriver");
+//        this.DRIVERPATH = config.getString("SqlDriverJar");
+        this.DRIVER = "org.postgresql.Driver";
+        this.DRIVERPATH = "lib/postgresql-42.5.4.jar";
 //        this.DRIVER = new DriverManager.registerDriver(); config.getString("sql-info.db-name");
     }
 
