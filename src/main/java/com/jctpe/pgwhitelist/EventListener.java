@@ -1,6 +1,7 @@
 package com.jctpe.pgwhitelist;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,10 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onPlayerLogin(PlayerJoinEvent e){
+        FileConfiguration config = getPGConfig();
         SqlHandler dbh = new SqlHandler(getPGConfig());
         UUID playerUuid = e.getPlayer().getUniqueId();
+        if (!config.getBoolean("plugin-enable")){ return; }
         if (dbh.checkPlayer(playerUuid)) {
             logInfo(e.getPlayer().getDisplayName() + "is on whitelist");
         } else {
