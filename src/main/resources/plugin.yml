@@ -1,7 +1,7 @@
 name: PGWhiteList
 main: com.jctpe.pgwhitelist.PGWhiteList
 version: 1.0
-api-version: 1.20
+api-version: '1.20'
 author: JoeTpe_aka_PGCat
 libraries:
   - org.postgresql:postgresql:42.2.27
