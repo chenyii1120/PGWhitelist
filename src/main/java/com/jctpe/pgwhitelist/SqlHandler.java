@@ -74,4 +74,25 @@ public class SqlHandler {
         }
 
     }
+
+    // TODO: 還沒寫，只是先複製上面的下來作為 template
+    public Boolean addPlayer(UUID playerUuid){
+        try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
+            if (cnx != null) {
+                String stmt = """
+                        SELECT * FROM whitelist
+                        WHERE active
+                        AND NOT ban
+                        AND uuid = '""" + playerUuid.toString() + "'";
+                Statement st = cnx.createStatement();
+                ResultSet rs = st.executeQuery(stmt);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+
+        // TODO: 為了消紅線先返回 true，這部分邏輯仍需處理
+        return true;
+    }
 }

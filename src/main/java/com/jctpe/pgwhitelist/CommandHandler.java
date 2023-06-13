@@ -34,6 +34,15 @@ public class CommandHandler implements CommandExecutor {
             return true;
         }
 
+        if (cmd.equalsIgnoreCase("add")) {
+            // 執行你的命令邏輯
+            pluginSwitch.disablePlugin();
+            sender.sendMessage("[PGWhitelist] Disabled!");
+
+            // 在此處添加你的其他命令處理邏輯
+            return true;
+        }
+
         return false;
     }
 }

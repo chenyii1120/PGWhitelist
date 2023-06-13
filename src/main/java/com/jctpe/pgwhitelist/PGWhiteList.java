@@ -78,7 +78,6 @@ public class PGWhiteList extends JavaPlugin {
     }
 
     public static void logInfo(String _message) {
-//        Logger logger = getPGLogger();
         logger.info(_message);
     }
 
