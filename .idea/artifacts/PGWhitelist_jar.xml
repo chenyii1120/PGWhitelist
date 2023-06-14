@@ -6,6 +6,9 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.5.4/postgresql-42.5.4.jar" path-in-jar="/" />
       <element id="artifact" artifact-name="PGWhitelist" />
+      <element id="library" level="project" name="Maven: org.json:json:20230227" />
+      <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.4" />
+      <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
     </root>
   </artifact>
 </component>

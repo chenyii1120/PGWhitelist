@@ -4,7 +4,8 @@ version: 1.0
 api-version: '1.20'
 author: JoeTpe_aka_PGCat
 libraries:
-  - org.postgresql:postgresql:42.2.27
+  - org.postgresql:postgresql:42.5.4
+  - org.json:json:20230227
 commands:
   pgwhitelist:
     aliases:

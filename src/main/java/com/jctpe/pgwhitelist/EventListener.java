@@ -22,7 +22,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerLogin(PlayerJoinEvent e){
         FileConfiguration config = getPGConfig();
-        SqlHandler dbh = new SqlHandler(getPGConfig());
+        SqlHandler dbh = new SqlHandler();
         UUID playerUuid = e.getPlayer().getUniqueId();
         if (!config.getBoolean("plugin-enable")){ return; }
         if (dbh.checkPlayer(playerUuid)) {
@@ -30,10 +30,7 @@ public class EventListener implements Listener {
         } else {
             logInfo(e.getPlayer().getDisplayName() + "is not on whitelist");
             String reason = "Sorry, you're not on whitelist. Please contact server admin for more info.";
-//            pgKickPlayer(e.getPlayer(), reason);
-//            String cmd = "/kick " + e.getPlayer().getDisplayName() + reason;
-            e.getPlayer().kickPlayer("Sorry, you're not on whitelist. Please contact server admin for more info.");
-//            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
+            e.getPlayer().kickPlayer(reason);
         }
     }
 }

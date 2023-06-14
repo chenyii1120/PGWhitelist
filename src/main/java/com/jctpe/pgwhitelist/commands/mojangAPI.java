@@ -10,7 +10,6 @@ import org.json.JSONObject;
 public class mojangAPI {
 
     public static UUID checkPlayerUUID(String userID) throws Exception {
-//        String username = userID; // 替換為你想要查詢的玩家名稱
         URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + userID);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
