@@ -17,7 +17,7 @@ commands:
       /<command> activate [player-name] - activate the player in SQL whitelist.
       /<command> deactivate [player-name] - deactivate the player in SQL whitelist.
       /<command> ban [player-name] [reason] - ban a player from whitelist.
-      /<command> unban [player-name] - ban a player from whitelist.
+      /<command> unban [player-name] - unban a player from whitelist.
       /<command> on|off - switch the whitelist on/off.
       /<command> list - list the whole player list from whitelist.
       /<command> jsondump - import the Minecraft native whitelist json file into SQL whitelist.

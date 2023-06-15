@@ -24,7 +24,6 @@ public class mojangAPI {
         in.close();
 
         String res_str = response.toString();
-        System.out.println(res_str);
 
         // 使用org.json.JSONObject解析JSON數據
         JSONObject jsonObject = new JSONObject(res_str);

@@ -29,6 +29,6 @@ public class unbanPlayer {
             senderID = player.getDisplayName();
         }
 
-        return dbh.banPlayer(uuid, userID, senderID);
+        return dbh.unbanPlayer(uuid, userID, senderID);
     }
 }

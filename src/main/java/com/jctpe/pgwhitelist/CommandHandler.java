@@ -1,6 +1,7 @@
 package com.jctpe.pgwhitelist;
 
 import com.jctpe.pgwhitelist.commands.*;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -41,7 +42,14 @@ public class CommandHandler implements CommandExecutor {
         }
 
         if (cmd.equalsIgnoreCase("ban")) {
-            String rtn_msg = banPlayer.banPlayerById(args[1], sender, senderIsPlayer);
+            String reason = "";
+            if (args.length > 2){ reason = args[2]; }
+
+            String rtn_msg = banPlayer.banPlayerById(args[1], reason, sender, senderIsPlayer);
+            Player target = Bukkit.getPlayer(args[1]);
+            if (target != null && target.isOnline()){
+                target.kickPlayer(String.format("Sorry, you just got banned because %s", reason));
+            }
             sender.sendMessage(String.format("[PGWhitelist] %s", rtn_msg));
             return true;
         }

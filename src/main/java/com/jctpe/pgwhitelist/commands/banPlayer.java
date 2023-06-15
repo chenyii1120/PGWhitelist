@@ -10,7 +10,7 @@ import static com.jctpe.pgwhitelist.PGWhiteList.logInfo;
 
 public class banPlayer {
 
-    public static String banPlayerById(String userID, CommandSender sender, boolean sendByPlayer){
+    public static String banPlayerById(String userID, String bannedReason, CommandSender sender, boolean sendByPlayer){
         SqlHandler dbh = new SqlHandler();
         UUID uuid;
         try {
@@ -29,7 +29,7 @@ public class banPlayer {
             senderID = player.getDisplayName();
         }
 
-        return dbh.banPlayer(uuid, userID, senderID);
+        return dbh.banPlayer(uuid, bannedReason, userID, senderID);
     }
 
 }
