@@ -181,5 +181,29 @@ public class SqlHandler {
         return "SQL connection error, please try again or check the params.";
     }
 
+    public String unbanPlayer(UUID playerUuid, String targetID, String senderID){
+        try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
+            if (cnx != null) {
+                String stmt = String.format("""
+                    UPDATE %s SET
+                        ban = 'f', update_time = NOW(), update_name = '%s'
+                    WHERE uuid = '%s'
+                """, TABLE_NAME, senderID, playerUuid.toString());
+                Statement st = cnx.createStatement();
+                try{
+                    st.execute(stmt);
+                } catch (SQLException e){
+                    return "SQL update error, please try again or check the params.";
+                }
+                return String.format("Player \"%s\" is no longer get banned.", targetID);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return "SQL connection error, please try again or check the params.";
+        }
+
+        return "SQL connection error, please try again or check the params.";
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package com.jctpe.pgwhitelist;
 
-import com.jctpe.pgwhitelist.commands.addPlayer;
-import com.jctpe.pgwhitelist.commands.banPlayer;
-import com.jctpe.pgwhitelist.commands.pluginSwitch;
-import com.jctpe.pgwhitelist.commands.removePlayer;
+import com.jctpe.pgwhitelist.commands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,6 +42,12 @@ public class CommandHandler implements CommandExecutor {
 
         if (cmd.equalsIgnoreCase("ban")) {
             String rtn_msg = banPlayer.banPlayerById(args[1], sender, senderIsPlayer);
+            sender.sendMessage(String.format("[PGWhitelist] %s", rtn_msg));
+            return true;
+        }
+
+        if (cmd.equalsIgnoreCase("unban")) {
+            String rtn_msg = unbanPlayer.unbanPlayerById(args[1], sender, senderIsPlayer);
             sender.sendMessage(String.format("[PGWhitelist] %s", rtn_msg));
             return true;
         }
