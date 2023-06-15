@@ -98,9 +98,9 @@ public class SqlHandler {
                 """, TABLE_NAME, playerUuid.toString());
                 Statement st = cnx.createStatement();
                 ResultSet rs = st.executeQuery(stmt);
-                return !rs.next();
+                return rs.next();
             } else {
-                return true;
+                return false;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -108,7 +108,7 @@ public class SqlHandler {
         }
     }
 
-    public Boolean addPlayer(UUID playerUuid, String targetID, String senderID){
+    public String addPlayer(UUID playerUuid, String targetID, String senderID){
         try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
             if (cnx != null) {
                 String stmt = String.format("""
@@ -122,15 +122,64 @@ public class SqlHandler {
                 try{
                     st.execute(stmt);
                 } catch (SQLException e){
-                    return false;
+                    return "SQL insertion error, please try again or check the params.";
                 }
-                return true;
+                return String.format("Player \"%s\" is added to the whitelist.", targetID);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return false;
+            return "SQL connection error, please try again or check the params.";
         }
 
-        return false;
+        return "SQL connection error, please try again or check the params.";
     }
+
+    public String deletePlayer(UUID playerUuid, String targetID){
+        try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
+            if (cnx != null) {
+                String stmt = String.format("""
+                    DELETE FROM %s
+                    WHERE uuid = '%s'
+                """, TABLE_NAME, playerUuid.toString());
+                Statement st = cnx.createStatement();
+                try{
+                    st.execute(stmt);
+                } catch (SQLException e){
+                    return "SQL deletion error, please try again or check the params.";
+                }
+                return String.format("Player \"%s\" is deleted from the whitelist.", targetID);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return "SQL connection error, please try again or check the params.";
+        }
+
+        return "SQL connection error, please try again or check the params.";
+    }
+
+    public String banPlayer(UUID playerUuid, String targetID, String senderID){
+        try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
+            if (cnx != null) {
+                String stmt = String.format("""
+                    UPDATE %s SET
+                        ban = 't', update_time = NOW(), update_name = '%s'
+                    WHERE uuid = '%s'
+                """, TABLE_NAME, senderID, playerUuid.toString());
+                Statement st = cnx.createStatement();
+                try{
+                    st.execute(stmt);
+                } catch (SQLException e){
+                    return "SQL update error, please try again or check the params.";
+                }
+                return String.format("Player \"%s\" is now get banned.", targetID);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return "SQL connection error, please try again or check the params.";
+        }
+
+        return "SQL connection error, please try again or check the params.";
+    }
+
+
 }
