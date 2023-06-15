@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="PGWhitelist">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/out/artifacts/PGWhitelist/PGWhitelist.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

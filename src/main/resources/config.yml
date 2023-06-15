@@ -1,8 +1,7 @@
-enabled-sql: false
+plugin-enable: false
 sql-info:
   address: ""
   port: ""
   username: ""
   password: ""
   db-name: ""
-SqlDriver: "org.postgresql.Driver"
