@@ -60,6 +60,9 @@ public class SqlHandler {
                     AND NOT ban
                     AND uuid = '%s'
                 """, TABLE_NAME, playerUuid.toString());
+                // 如果要用 ps 的話，statement 裡面要用 ? 代換參數，idx 從 1 起
+                // PreparedStatement ps = cnx.prepareStatement(stmt);
+                // ps.setString(1, playerUuid.toString());
                 Statement st = cnx.createStatement();
                 ResultSet rs = st.executeQuery(stmt);
                 int i = 0;
