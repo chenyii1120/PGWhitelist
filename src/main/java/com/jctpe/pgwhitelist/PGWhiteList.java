@@ -39,7 +39,7 @@ public class PGWhiteList extends JavaPlugin {
             logger.info("SQL Whitelisting is disabled.");
         }
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
-         Objects.requireNonNull(Bukkit.getPluginCommand("pgwhitelist")).setExecutor(new CommandHandler());
+        Objects.requireNonNull(Bukkit.getPluginCommand("pgwhitelist")).setExecutor(new CommandHandler());
     }
 
     public static PGWhiteList getInstance(){ return instance; }
