@@ -58,7 +58,7 @@ public class SqlHandler {
                 while (rs.next()) {
                     i++;
                     active = rs.getBoolean("is_active");
-                    ban = rs.getBoolean("is_ban");
+                    ban = rs.getBoolean("is_banned");
                     deactivateDesc = rs.getString("deactivate_desc");
                     banDesc = rs.getString("ban_desc");
                 }
@@ -66,6 +66,9 @@ public class SqlHandler {
                 boolean passFlag = i == 1;
                 if (passFlag){
                     if (!active){
+                        if (deactivateDesc == null){
+                            deactivateDesc = "帳號已暫時被停用，請嘗試至 https://cnf.rn-ws.com/ 刷新你的 Discord 驗證權杖。";
+                        }
                         return deactivateDesc;
                     }
                     if (ban){
