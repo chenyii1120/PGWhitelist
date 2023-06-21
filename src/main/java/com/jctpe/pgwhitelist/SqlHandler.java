@@ -17,7 +17,7 @@ public class SqlHandler {
     private final String PATH = "jdbc:postgresql://" + ADDR + ":" + PORT + "/" + DBNAME;
     private final String DRIVERPATH = "org.postgresql.Driver";
     private final String DRIVER = "lib/postgresql-42.5.4.jar";
-    private final String TABLE_NAME = "whitelist";
+    private final String TABLE_NAME = "pg_whitelist";
 
     public Boolean testConnection() {
         try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
@@ -33,26 +33,44 @@ public class SqlHandler {
         }
     }
 
-    public Boolean checkPlayer(UUID playerUuid) {
+    public String checkPlayer(UUID playerUuid) {
         try (Connection cnx = DriverManager.getConnection(PATH, USERNAME, PASSWORD)) {
             if (cnx != null) {
+//                String stmt = String.format("""
+//                    SELECT * FROM %s
+//                    WHERE active
+//                    AND NOT ban
+//                    AND uuid = ?
+//                """, TABLE_NAME);
                 String stmt = String.format("""
                     SELECT * FROM %s
-                    WHERE active
-                    AND NOT ban
-                    AND uuid = ?
-                """, TABLE_NAME); //, playerUuid.toString());
+                    WHERE uuid = ?
+                """, TABLE_NAME);
                 // 如果要用 ps 的話，statement 裡面要用 ? 代換參數，idx 從 1 起
                 PreparedStatement ps = cnx.prepareStatement(stmt);
                 ps.setObject(1, playerUuid);
                 ResultSet rs = ps.executeQuery();
                 int i = 0;
+                boolean active = false;
+                boolean ban = true;
+                String deactivateDesc = "";
+                String banDesc = "";
                 while (rs.next()) {
                     i++;
+                    active = rs.getBoolean("is_active");
+                    ban = rs.getBoolean("is_ban");
+                    deactivateDesc = rs.getString("deactivate_desc");
+                    banDesc = rs.getString("ban_desc");
                 }
                 rs.close();
                 boolean passFlag = i == 1;
                 if (passFlag){
+                    if (!active){
+                        return deactivateDesc;
+                    }
+                    if (ban){
+                        return banDesc;
+                    }
                     stmt = String.format("""
                         UPDATE %s SET
                             last_login = NOW()
@@ -66,13 +84,13 @@ public class SqlHandler {
                         e.printStackTrace();
                     }
                     ps.close();
-                    return true;
+                    return "OK";
                 }
             }
-            return false;
+            return "抱歉，你不在白名單上。";
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return "false";
         }
     }
 
@@ -157,13 +175,14 @@ public class SqlHandler {
             if (cnx != null) {
                 String stmt = String.format("""
                     UPDATE %s SET
-                        ban = 't', update_time = NOW(), update_name = ?
+                        ban = 't', update_time = NOW(), update_name = ?, ban_desc = ?
                     WHERE uuid = ?
                 """, TABLE_NAME);
                 PreparedStatement ps = cnx.prepareStatement(stmt);
                 try (ps){
                     ps.setString(1, senderID);
-                    ps.setObject(2, playerUuid);
+                    ps.setString(2, bannedReason);
+                    ps.setObject(3, playerUuid);
                     ps.execute();
                 } catch (SQLException e){
                     return "SQL update error, please try again or check the params.";
