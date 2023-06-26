@@ -140,16 +140,20 @@ public class SqlHandler {
                     ps.setString(3, senderID);
                     ps.execute();
                 } catch (SQLException e) {
-                    return "SQL insertion error, please try again or check the params.";
+//                    return "SQL insertion error, please try again or check the params.";
+                    return "資料庫異常，寫入失敗.";
                 }
-                return String.format("Player \"%s\" is added to the whitelist.", targetID);
+//                return String.format("Player \"%s\" is added to the whitelist.", targetID);
+                return String.format("已將玩家 \"%s\" 新增至白名單內.", targetID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return "SQL connection error, please try again or check the params.";
+//            return "SQL connection error, please try again or check the params.";
+            return "資料庫連線異常，請檢查連線或再試一次.";
         }
 
-        return "SQL connection error, please try again or check the params.";
+//        return "SQL connection error, please try again or check the params.";
+        return "資料庫連線異常，請檢查連線或再試一次.";
     }
 
     public String deletePlayer(UUID playerUuid, String targetID){
@@ -164,16 +168,20 @@ public class SqlHandler {
                     ps.setObject(1, playerUuid);
                     ps.execute();
                 } catch (SQLException e){
-                    return "SQL deletion error, please try again or check the params.";
+//                    return "SQL deletion error, please try again or check the params.";
+                    return "資料庫異常，刪除失敗.";
                 }
-                return String.format("Player \"%s\" is deleted from the whitelist.", targetID);
+//                return String.format("Player \"%s\" is deleted from the whitelist.", targetID);
+                return String.format("已將玩家 \"%s\" 從白名單中移除.", targetID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return "SQL connection error, please try again or check the params.";
+//            return "SQL connection error, please try again or check the params.";
+            return "資料庫連線異常，請檢查連線或再試一次.";
         }
 
-        return "SQL connection error, please try again or check the params.";
+//        return "SQL connection error, please try again or check the params.";
+        return "資料庫連線異常，請檢查連線或再試一次.";
     }
 
     public String banPlayer(UUID playerUuid, String bannedReason, String targetID, String senderID){
@@ -191,16 +199,20 @@ public class SqlHandler {
                     ps.setObject(3, playerUuid);
                     ps.execute();
                 } catch (SQLException e){
-                    return "SQL update error, please try again or check the params.";
+//                    return "SQL update error, please try again or check the params.";
+                    return "資料庫異常，資料更新失敗.";
                 }
-                return String.format("Player \"%s\" is now get banned.", targetID);
+//                return String.format("Player \"%s\" is now get banned.", targetID);
+                return String.format("玩家 \"%s\" 已被封禁，原因：%s.", targetID, bannedReason);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return "SQL connection error, please try again or check the params.";
+//            return "SQL connection error, please try again or check the params.";
+            return "資料庫連線異常，請檢查連線或再試一次.";
         }
 
-        return "SQL connection error, please try again or check the params.";
+//        return "SQL connection error, please try again or check the params.";
+        return "資料庫連線異常，請檢查連線或再試一次.";
     }
 
     public String unbanPlayer(UUID playerUuid, String targetID, String senderID){
@@ -217,16 +229,20 @@ public class SqlHandler {
                     ps.setObject(2, playerUuid);
                     ps.execute();
                 } catch (SQLException e){
-                    return "SQL update error, please try again or check the params.";
+//                    return "SQL update error, please try again or check the params.";
+                    return "資料庫異常，資料更新失敗.";
                 }
-                return String.format("Player \"%s\" is no longer get banned.", targetID);
+//                return String.format("Player \"%s\" is no longer get banned.", targetID);
+                return String.format("玩家 \"%s\" 已被解除封禁.", targetID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return "SQL connection error, please try again or check the params.";
+//            return "SQL connection error, please try again or check the params.";
+            return "資料庫連線異常，請檢查連線或再試一次.";
         }
 
-        return "SQL connection error, please try again or check the params.";
+//        return "SQL connection error, please try again or check the params.";
+        return "資料庫連線異常，請檢查連線或再試一次.";
     }
 
 
