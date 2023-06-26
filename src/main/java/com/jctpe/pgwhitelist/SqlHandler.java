@@ -72,6 +72,9 @@ public class SqlHandler {
                         return deactivateDesc;
                     }
                     if (ban){
+                        if (banDesc.equals("")){
+                            banDesc = "您已被管理員封禁，但他沒有留下更多訊息。";
+                        }
                         return banDesc;
                     }
                     stmt = String.format("""
