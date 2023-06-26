@@ -18,10 +18,11 @@ public class addPlayer {
         } catch (Exception e) {
             logInfo("Some error occur");
             e.printStackTrace();
-            return "Mojang API connection failed, please try again. If this situation continues, please check your Internet connection.";
+//            return "Mojang API connection failed, please try again. If this situation continues, please check your Internet connection.";
+            return "Mojang API 連線失敗, 請再試一次。如果這個情況持續發生，請檢查伺服器的網路連線。";
         }
 
-        if (dbh.checkPlayerInDb(uuid)){ return String.format("This player \"%s\" is already in database.", userID); }
+        if (dbh.checkPlayerInDb(uuid)){ return String.format("該玩家 \"%s\" 已存在於資料庫中.", userID); }
 
         String senderID = "SYSTEM";
         if (sendByPlayer){
