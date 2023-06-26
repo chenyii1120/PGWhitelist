@@ -24,7 +24,7 @@ public class CommandHandler implements CommandExecutor {
         }
 
         if (cmd.equalsIgnoreCase("list")) {
-            sender.sendMessage("You can visit the web version whitelist: https://google.com/");
+            sender.sendMessage("你可以至網頁版白名單查看完整訊息: https://cnf.rn-ws.com/");
             return true;
         }
 
@@ -34,21 +34,21 @@ public class CommandHandler implements CommandExecutor {
         }
         // 此部分以上可用來執行無需 OP 權限也可執行的指令
         if (tmpPlayer != null && !tmpPlayer.isOp()) {
-            sender.sendMessage(String.format("[PGWhitelist] %s", "Sorry, you don't have permission to do that."));
+            sender.sendMessage(String.format("[PGWhitelist] %s", "抱歉，你沒有權限這麼做。"));
             return true;
         }
 
         // 啟用白單
         if (cmd.equalsIgnoreCase("on")) {
             pluginSwitch.enablePlugin();
-            sender.sendMessage("[PGWhitelist] Enabled!");
+            sender.sendMessage("[PGWhitelist] 白名單已啟用!");
             return true;
         }
 
         // 停用白單
         if (cmd.equalsIgnoreCase("off")) {
             pluginSwitch.disablePlugin();
-            sender.sendMessage("[PGWhitelist] Disabled!");
+            sender.sendMessage("[PGWhitelist] 白名單已停用!");
             return true;
         }
 
@@ -72,7 +72,7 @@ public class CommandHandler implements CommandExecutor {
             String rtn_msg = banPlayer.banPlayerById(args[1], reason, sender, senderIsPlayer);
             Player target = Bukkit.getPlayer(args[1]);
             if (target != null && target.isOnline()){
-                target.kickPlayer(String.format("Sorry, you just got banned because %s", reason));
+                target.kickPlayer(String.format("抱歉，您已被管理員封禁，原因： %s", reason));
             }
             sender.sendMessage(String.format("[PGWhitelist] %s", rtn_msg));
             return true;
