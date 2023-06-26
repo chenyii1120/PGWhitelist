@@ -125,7 +125,7 @@ public class SqlHandler {
             if (cnx != null) {
                 String stmt = String.format("""
                     INSERT INTO %s (
-                        uuid, player_id, active, ban, input_time, input_name
+                        uuid, player_id, is_active, is_banned, input_time, input_name
                     ) VALUES (
                         ?, ?, 't', 'f', NOW(), ?
                     )
@@ -178,7 +178,7 @@ public class SqlHandler {
             if (cnx != null) {
                 String stmt = String.format("""
                     UPDATE %s SET
-                        ban = 't', update_time = NOW(), update_name = ?, ban_desc = ?
+                        is_banned = 't', update_time = NOW(), update_name = ?, ban_desc = ?
                     WHERE uuid = ?
                 """, TABLE_NAME);
                 PreparedStatement ps = cnx.prepareStatement(stmt);
@@ -205,7 +205,7 @@ public class SqlHandler {
             if (cnx != null) {
                 String stmt = String.format("""
                     UPDATE %s SET
-                        ban = 'f', update_time = NOW(), update_name = ?
+                        is_banned = 'f', update_time = NOW(), update_name = ?
                     WHERE uuid = ?
                 """, TABLE_NAME);
                 PreparedStatement ps = cnx.prepareStatement(stmt);
