@@ -12,16 +12,26 @@ commands:
       - pgwl
       - pg
     usage: |
-      /<command> add [player-name] - add player into SQL whitelist. (auto activate)
-      /<command> remove [player-name] - remove player from SQL whitelist.
-      /<command> activate [player-name] - activate the player in SQL whitelist.
-      /<command> deactivate [player-name] - deactivate the player in SQL whitelist.
-      /<command> ban [player-name] [reason] - ban a player from whitelist.
-      /<command> unban [player-name] - unban a player from whitelist.
-      /<command> on|off - switch the whitelist on/off.
-      /<command> list - list the whole player list from whitelist.
-      /<command> jsondump - import the Minecraft native whitelist json file into SQL whitelist.
-      /<command> dbdump - export the SQL whitelist into Minecraft native whitelist json format.
+      /<command> add [玩家ID] - 將玩家加入白名單中(自動啟用).
+      /<command> remove [玩家ID] - 將玩家從白名單中刪除(是真的刪除).
+      /<command> activate [玩家ID] - 將白名單中的玩家設定啟用.
+      /<command> deactivate [玩家ID] - 將白名單中的玩家設定為停用.
+      /<command> ban [玩家ID] [原因] - 封禁玩家，如果該名玩家正在遊戲中，將會將他踢出伺服器.
+      /<command> unban [玩家ID] - 解禁玩家.
+      /<command> on|off - 啟用/停用白名單系統.
+      /<command> list - 列出當前白名單.
+      /<command> jsondump - import the Minecraft native whitelist json file into SQL whitelist <未實裝>.
+      /<command> dbdump - export the SQL whitelist into Minecraft native whitelist json format <未實裝>.
+#      /<command> add [player-name] - add player into SQL whitelist. (auto activate)
+#      /<command> remove [player-name] - remove player from SQL whitelist.
+#      /<command> activate [player-name] - activate the player in SQL whitelist.
+#      /<command> deactivate [player-name] - deactivate the player in SQL whitelist.
+#      /<command> ban [player-name] [reason] - ban a player from whitelist.
+#      /<command> unban [player-name] - unban a player from whitelist.
+#      /<command> on|off - switch the whitelist on/off.
+#      /<command> list - list the whole player list from whitelist.
+#      /<command> jsondump - import the Minecraft native whitelist json file into SQL whitelist.
+#      /<command> dbdump - export the SQL whitelist into Minecraft native whitelist json format.
     permission-message: "You don't have permission to do that."
 
 permissions:
